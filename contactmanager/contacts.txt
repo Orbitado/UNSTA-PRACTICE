@@ -5,17 +5,12 @@ Phone: 3816134310
 Email: juanpaavaldezz@gmail.com
 Location: Tucuman
 Company: Globant
+
 --- Contact Details ---
-Name: Leonardo
-Surname: Valdez
+Name: Felicitas
+Surname: Buteler
 Phone: 3816134310
-Email: juanpaavaldezz@gmail.com
+Email: butelerfelicitas@gmail.com
 Location: Tucuman
 Company: Globant
---- Contact Details ---
-Name: Leonardo
-Surname: Valdez
-Phone: 3816134310
-Email: juanpaavaldezz@gmail.com
-Location: Tucumna
-Company: Globant
+
