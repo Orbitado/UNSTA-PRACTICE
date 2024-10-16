@@ -1,87 +1,93 @@
-// TODO: Contact Manager Project in C.
-
-// ! Core Functionalities:
-// ? Basic Storage: Store essential contact details, including:
-
-// * Name
-// * Phone Number
-// * (Optional) Email Address, Location, and Company
-// * File Management (CRUD Operations):
-// * Implement file handling mechanisms to manage contacts, allowing users to:
-
-// * Create: Add a new contact to the file.
-// * Read: Display contact information from the file.
-// * Update: Modify existing contact details.
-// * Delete: Remove a contact from the file.
-// * Search and Filter:
-// * Allow users to search and filter contacts based on specific criteria such as:
-
-// * Name
-// * Location
-// * Company
-// * Additionally, implement sorting functionality by:
-// * Name (Alphabetical Order)
-// * Date Added (Chronologically)
-
 #include <stdio.h>
+#include <stdlib.h>
+
+void addContact();
+void seeAllContacts();
+void openMenu();
+void menuOptions(int choice);
 
 typedef struct
 {
-    char name[20];
-    char surname[100];
-    char phone[20];
-    char email[100];
-    char location[100];
-    char company[100];
+    char name[30];
+    char surname[30];
+    char phone[50];
+    char email[50];
+    char location[50];
+    char company[50];
 } Contact;
 
-void addContact()
-{
-    Contact contact;
-    printf("Enter First Name: ");
-    scanf("%s", contact.name);
-    printf("Enter Surname: ");
-    scanf("%s", contact.surname);
-    printf("Enter Phone Number: ");
-    scanf("%s", contact.phone);
-    printf("--- Optional (You can avoid this section. Press enter if you want it) ---\n");
-    printf("Enter Email Address: ");
-    scanf("%s", contact.email);
-    printf("Enter Location: ");
-    scanf("%s", contact.location);
-    printf("Enter Company: ");
-    scanf("%s", contact.company);
-    printf("Contact added successfully!\n");
-}
-
-int main()
+void openMenu()
 {
     int choice;
-    printf("--- Contact Manager ---\n");
-    printf("1. Add Contact\n");
-    printf("2. Delete Contact\n");
-    printf("3. See All Contacts\n");
-    printf("4. Exit\n");
-    printf("Enter your choice: ");
-    scanf("%d", &choice);
+    do
+    {
+        printf("--- Contact Manager ---\n");
+        printf("1. Add Contact\n");
+        printf("2. Delete Contact\n");
+        printf("3. See All Contacts\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        openMenuOptions(choice);
+    } while (choice != 4);
+}
 
+void openMenuOptions(int choice)
+{
     switch (choice)
     {
     case 1:
         printf("--- Add Contact Details ---\n");
+        addContact();
         break;
     case 2:
         printf("--- Select the contact to delete ---\n");
+        // deleteContact() function would go here
         break;
     case 3:
-        printf("--- You are seeing all contacts ---\n");
+        printf("--- All Contacts ---\n");
+        seeAllContacts();
         break;
     case 4:
         printf("--- Closing Program ---\n");
         break;
     default:
-        printf("--- Your choice is invalid ---\n");
+        printf("Invalid choice. Please try again.\n");
     }
+}
 
+void addContact()
+{
+    FILE *fp = fopen("contacts.txt", "a+");
+    if (fp == NULL)
+    {
+        printf("Error opening file\n");
+        exit(1);
+    }
+    else
+    {
+        Contact contact;
+        printf("Enter name: ");
+        scanf("%s", contact.name);
+        printf("Enter surname: ");
+        scanf("%s", contact.surname);
+        printf("Enter phone number: ");
+        scanf("%s", contact.phone);
+        printf("Enter email address: ");
+        scanf("%s", contact.email);
+        printf("Enter location: ");
+        scanf("%s", contact.location);
+        printf("Enter company: ");
+        scanf("%s", contact.company);
+
+        fprintf(fp, "Name: %s\nSurname: %s\nPhone: %s\nEmail: %s\nLocation: %s\nCompany: %s\n\n", contact.name, contact.surname, contact.phone, contact.email, contact.location, contact.company);
+        fclose(fp);
+        printf("Contact added successfully.\n");
+    }
+}
+
+int main()
+{
+    menu();
     return 0;
 }
