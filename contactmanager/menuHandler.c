@@ -38,7 +38,7 @@ void openMenuOptions(int choice)
         break;
     case 4:
         printf("--- Modify Contacts ---\n");
-        // modifyContact();
+        modifyContact();
         break;
     case 5:
         printf("--- Sort Contacts ---\n");

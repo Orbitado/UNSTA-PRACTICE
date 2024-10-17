@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-FILE *openFile(char fileName, char mode)
+FILE *openFile(const char *fileName, const char *mode)
 {
     FILE *fp = fopen(fileName, mode);
     if (fp == NULL)
@@ -40,7 +40,7 @@ void addContact()
 
 void seeAllContacts()
 {
-    FILE *fp = openFile("contacts.dat", "ab");
+    FILE *fp = openFile("contacts.dat", "rb");
 
     Contact contact;
     while (fread(&contact, sizeof(Contact), 1, fp))
@@ -82,6 +82,53 @@ void deleteContact()
             fwrite(&contact, sizeof(Contact), 1, fp);
 
             printf("Contact deleted successfully.\n");
+            break;
+        }
+    }
+
+    if (!found)
+    {
+        printf("Contact not found.\n");
+    }
+
+    fclose(fp);
+}
+
+void modifyContact()
+{
+    FILE *fp = openFile("contacts.dat", "r+b");
+
+    char nameToModify[30];
+    printf("Enter name to modify: ");
+    scanf("%s", nameToModify);
+
+    Contact contact;
+    int found = 0;
+
+    while (fread(&contact, sizeof(Contact), 1, fp))
+    {
+        if (strcmp(contact.name, nameToModify) == 0)
+        {
+            found = 1;
+
+            printf("Enter new name: ");
+            scanf("%s", contact.name);
+            printf("Enter new surname: ");
+            scanf("%s", contact.surname);
+            printf("Enter new phone number: ");
+            scanf("%s", contact.phone);
+            printf("Enter new email address: ");
+            scanf("%s", contact.email);
+            printf("Enter new location: ");
+            scanf("%s", contact.location);
+            printf("Enter new company: ");
+            scanf("%s", contact.company);
+
+            fseek(fp, -(long)sizeof(Contact), SEEK_CUR);
+
+            fwrite(&contact, sizeof(Contact), 1, fp);
+
+            printf("Contact modified successfully.\n");
             break;
         }
     }
