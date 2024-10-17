@@ -12,10 +12,13 @@ typedef struct
     int isActive;
 } Contact;
 
+// FILE MANAGER
 FILE *openFile(const char *fileName, const char *mode);
+// CRUD CONTACT
 void createContact();
-int doesContactExist();
 void readContacts();
 void updateContact();
 void deleteContact();
+// CONTACT HANDLERS
 void sortContacts();
+int doesContactExist(const char *name, const char *surname, const char *phone, const char *email, const char *location, const char *company);
