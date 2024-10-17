@@ -35,7 +35,7 @@ void createContact()
 
     if (doesContactExist(contact.name, contact.surname, contact.phone, contact.email, contact.location, contact.company))
     {
-        printf("Contact already exists.\n");
+        printf("\nContact already exists.\n\n");
         fclose(fp);
         return;
     }
