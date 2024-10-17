@@ -1,6 +1,6 @@
 #include "menuHandler.h"
 #include <stdio.h>
-#include "contactManager.h"
+#include "crudContact.h"
 
 void openMenu()
 {
@@ -47,6 +47,27 @@ void openMenuOptions(int choice)
         break;
     case 6:
         printf("--- Closing Program ---\n");
+        break;
+    default:
+        printf("Invalid choice. Please try again.\n");
+    }
+}
+
+void openMenuSortOptions(int choice)
+{
+    switch (choice)
+    {
+    case 1:
+        printf("\n--- Sorting Contacts By First Name ---\n\n");
+        createContact();
+        break;
+    case 2:
+        printf("\n--- Sorting Contacts by Surname ---\n\n");
+        readContacts();
+        break;
+    case 3:
+        printf("\n--- Sorting Contacts by Company ---\n\n");
+        readContacts();
         break;
     default:
         printf("Invalid choice. Please try again.\n");

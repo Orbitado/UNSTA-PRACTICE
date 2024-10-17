@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 typedef struct
 {
     char name[30];
@@ -9,6 +12,7 @@ typedef struct
     int isActive;
 } Contact;
 
+FILE *openFile(const char *fileName, const char *mode);
 void createContact();
 int doesContactExist();
 void readContacts();
