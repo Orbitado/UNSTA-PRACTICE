@@ -53,23 +53,13 @@ void openMenuOptions(int choice)
     }
 }
 
-void openMenuSortOptions(int choice)
+void openMenuSortOptions()
 {
-    switch (choice)
-    {
-    case 1:
-        printf("\n--- Sorting Contacts By First Name ---\n\n");
-        createContact();
-        break;
-    case 2:
-        printf("\n--- Sorting Contacts by Surname ---\n\n");
-        readContacts();
-        break;
-    case 3:
-        printf("\n--- Sorting Contacts by Company ---\n\n");
-        readContacts();
-        break;
-    default:
-        printf("Invalid choice. Please try again.\n");
-    }
+    int choice;
+    printf("--- Select a sort option ---\n\n");
+    printf("1. Sort by First Name\n");
+    printf("2. Sort by Surname\n");
+    printf("3. Sort by Company\n");
+    scanf("%d", &choice);
+    openMenuOptions(choice);
 }

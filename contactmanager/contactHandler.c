@@ -20,7 +20,27 @@ int doesContactExist(const char *name, const char *surname, const char *phone, c
     return 0;
 }
 
-void sortContacts()
+int compareContacts(const void *a, const void *b, char option)
 {
-    FILE *fp = openFile("contacts.dat", "r+b");
+    const Contact *contact1 = (const Contact *)a;
+    const Contact *contact2 = (const Contact *)b;
+
+    switch (option)
+    {
+    case '1':
+        return strcmp(contact1->name, contact2->name);
+    case '2':
+        return strcmp(contact1->surname, contact2->surname);
+    case '3':
+        return strcmp(contact1->company, contact2->company);
+    default:
+        return 0;
+    }
 }
+
+// void sortContacts()
+// {
+//     FILE *fp = openFile("contacts.dat", "r+b");
+
+//     qsort(fp, sizeof(Contact), sizeof(Contact), compareContacts);
+// }
