@@ -33,9 +33,34 @@ void addContact()
     scanf("%s", contact.company);
     contact.isActive = 1;
 
+    if (doesContactExist(contact.name))
+    {
+        printf("Contact already exists.\n");
+        fclose(fp);
+        return;
+    }
+
     fwrite(&contact, sizeof(Contact), 1, fp);
     fclose(fp);
     printf("Contact added successfully.\n");
+}
+
+int doesContactExist(const char *name)
+{
+    FILE *fp = openFile("contacts.dat", "rb");
+
+    Contact contact;
+    while (fread(&contact, sizeof(Contact), 1, fp))
+    {
+        if (contact.isActive == 1 && strcmp(contact.name, name) == 0)
+        {
+            fclose(fp);
+            return 1;
+        }
+    }
+
+    fclose(fp);
+    return 0;
 }
 
 void seeAllContacts()
