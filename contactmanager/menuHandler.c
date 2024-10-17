@@ -11,11 +11,13 @@ void openMenu()
         printf("1. Add Contact\n");
         printf("2. Delete Contact\n");
         printf("3. See All Contacts\n");
-        printf("4. Exit\n\n");
+        printf("4. Modify Contact\n");
+        printf("5. Sort Contact\n");
+        printf("6. Exit\n\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
         openMenuOptions(choice);
-    } while (choice != 4);
+    } while (choice != 6);
 }
 
 void openMenuOptions(int choice)
@@ -35,6 +37,14 @@ void openMenuOptions(int choice)
         seeAllContacts();
         break;
     case 4:
+        printf("--- Modify Contacts ---\n");
+        // modifyContact();
+        break;
+    case 5:
+        printf("--- Sort Contacts ---\n");
+        // sortContacts();
+        break;
+    case 6:
         printf("--- Closing Program ---\n");
         break;
     default:

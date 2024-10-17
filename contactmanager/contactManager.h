@@ -11,3 +11,6 @@ typedef struct
 
 void addContact();
 void seeAllContacts();
+void deleteContact();
+void modifyContact();
+void sortContacts();
