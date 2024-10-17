@@ -6,6 +6,7 @@ typedef struct
     char email[50];
     char location[50];
     char company[50];
+    int isActive;
 } Contact;
 
 void addContact();

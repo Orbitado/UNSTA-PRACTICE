@@ -7,11 +7,11 @@ void openMenu()
     int choice;
     do
     {
-        printf("--- Contact Manager ---\n");
+        printf("--- Contact Manager ---\n\n");
         printf("1. Add Contact\n");
         printf("2. Delete Contact\n");
         printf("3. See All Contacts\n");
-        printf("4. Exit\n");
+        printf("4. Exit\n\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
         openMenuOptions(choice);
@@ -23,15 +23,15 @@ void openMenuOptions(int choice)
     switch (choice)
     {
     case 1:
-        printf("--- Add Contact Details ---\n");
+        printf("--- Add Contact Details ---\n\n");
         addContact();
         break;
     case 2:
-        printf("--- Select the contact to delete ---\n");
-        // deleteContact() se puede agregar aquí
+        printf("--- Select the contact to delete ---\n\n");
+        deleteContact();
         break;
     case 3:
-        printf("--- All Contacts ---\n");
+        printf("--- All Contacts ---\n\n");
         seeAllContacts();
         break;
     case 4:

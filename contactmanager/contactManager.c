@@ -1,10 +1,11 @@
 #include "contactManager.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void addContact()
 {
-    FILE *fp = fopen("contacts.txt", "a+");
+    FILE *fp = fopen("contacts.dat", "ab");
     if (fp == NULL)
     {
         printf("Error opening file\n");
@@ -25,8 +26,9 @@ void addContact()
         scanf("%s", contact.location);
         printf("Enter company: ");
         scanf("%s", contact.company);
+        contact.isActive = 1;
 
-        fprintf(fp, "--- Contact Details ---\nName: %s\nSurname: %s\nPhone: %s\nEmail: %s\nLocation: %s\nCompany: %s\n\n", contact.name, contact.surname, contact.phone, contact.email, contact.location, contact.company);
+        fwrite(&contact, sizeof(Contact), 1, fp);
         fclose(fp);
         printf("Contact added successfully.\n");
     }
@@ -34,21 +36,70 @@ void addContact()
 
 void seeAllContacts()
 {
-    FILE *fp = fopen("contacts.txt", "r");
+    FILE *fp = fopen("contacts.dat", "rb");
     if (fp == NULL)
     {
-        printf("No contacts available.\n");
-        return;
+        printf("Error opening file\n");
+        exit(1);
     }
     else
     {
-
-        char line[1024];
-
-        while (fgets(line, sizeof(line), fp))
+        Contact contact;
+        while (fread(&contact, sizeof(Contact), 1, fp))
         {
-            printf("%s", line);
+            if (contact.isActive == 0)
+            {
+                continue;
+            }
+            printf("Name: %s\n", contact.name);
+            printf("Surname: %s\n", contact.surname);
+            printf("Phone number: %s\n", contact.phone);
+            printf("Email address: %s\n", contact.email);
+            printf("Location: %s\n", contact.location);
+            printf("Company: %s\n\n", contact.company);
         }
+        fclose(fp);
+    }
+}
+
+void deleteContact()
+{
+    FILE *fp = fopen("contacts.dat", "r+b");
+    if (fp == NULL)
+    {
+        printf("Error opening file\n");
+        exit(1);
+    }
+    else
+    {
+        char nameToDelete[30];
+        printf("Enter name of contact to delete: ");
+        scanf("%s", nameToDelete);
+
+        Contact contact;
+        int found = 0;
+
+        while (fread(&contact, sizeof(Contact), 1, fp))
+        {
+            if (strcmp(contact.name, nameToDelete) == 0 && contact.isActive == 1)
+            {
+                found = 1;
+                contact.isActive = 0;
+
+                fseek(fp, -(long)sizeof(Contact), SEEK_CUR);
+
+                fwrite(&contact, sizeof(Contact), 1, fp);
+
+                printf("Contact deleted successfully.\n");
+                break;
+            }
+        }
+
+        if (!found)
+        {
+            printf("Contact not found.\n");
+        }
+
         fclose(fp);
     }
 }
