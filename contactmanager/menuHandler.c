@@ -9,8 +9,8 @@ void openMenu()
     {
         printf("--- Contact Manager ---\n\n");
         printf("1. Add Contact\n");
-        printf("2. Delete Contact\n");
-        printf("3. See All Contacts\n");
+        printf("2. See All Contacts\n");
+        printf("3. Delete Contact\n");
         printf("4. Modify Contact\n");
         printf("5. Sort Contact\n");
         printf("6. Exit\n\n");
@@ -29,12 +29,12 @@ void openMenuOptions(int choice)
         addContact();
         break;
     case 2:
-        printf("--- Select the contact to delete ---\n\n");
-        deleteContact();
-        break;
-    case 3:
         printf("--- All Contacts ---\n\n");
         seeAllContacts();
+        break;
+    case 3:
+        printf("--- Select the contact to delete ---\n\n");
+        deleteContact();
         break;
     case 4:
         printf("--- Modify Contacts ---\n");
@@ -42,6 +42,7 @@ void openMenuOptions(int choice)
         break;
     case 5:
         printf("--- Sort Contacts ---\n");
+        printf("This feature will be added soon...\n");
         // sortContacts();
         break;
     case 6:

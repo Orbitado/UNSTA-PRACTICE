@@ -19,7 +19,7 @@ void addContact()
     FILE *fp = openFile("contacts.dat", "ab");
 
     Contact contact;
-    printf("Enter name: ");
+    printf("Enter first name: ");
     scanf("%s", contact.name);
     printf("Enter surname: ");
     scanf("%s", contact.surname);
@@ -49,13 +49,61 @@ void seeAllContacts()
         {
             continue;
         }
-        printf("Name: %s\n", contact.name);
+        printf("First Name: %s\n", contact.name);
         printf("Surname: %s\n", contact.surname);
         printf("Phone number: %s\n", contact.phone);
         printf("Email address: %s\n", contact.email);
         printf("Location: %s\n", contact.location);
         printf("Company: %s\n\n", contact.company);
     }
+
+    fclose(fp);
+}
+
+void modifyContact()
+{
+    FILE *fp = openFile("contacts.dat", "r+b");
+
+    char nameToModify[30];
+    printf("Enter name to modify: ");
+    scanf("%s", nameToModify);
+
+    Contact contact;
+    int found = 0;
+
+    while (fread(&contact, sizeof(Contact), 1, fp))
+    {
+        if (strcmp(contact.name, nameToModify) == 0)
+        {
+            found = 1;
+
+            printf("Enter new first name: ");
+            scanf("%s", contact.name);
+            printf("Enter new surname: ");
+            scanf("%s", contact.surname);
+            printf("Enter new phone number: ");
+            scanf("%s", contact.phone);
+            printf("Enter new email address: ");
+            scanf("%s", contact.email);
+            printf("Enter new location: ");
+            scanf("%s", contact.location);
+            printf("Enter new company: ");
+            scanf("%s", contact.company);
+
+            fseek(fp, -(long)sizeof(Contact), SEEK_CUR);
+
+            fwrite(&contact, sizeof(Contact), 1, fp);
+
+            printf("\nContact modified successfully.\n");
+            break;
+        }
+    }
+
+    if (!found)
+    {
+        printf("Contact not found.\n");
+    }
+
     fclose(fp);
 }
 
@@ -82,53 +130,6 @@ void deleteContact()
             fwrite(&contact, sizeof(Contact), 1, fp);
 
             printf("Contact deleted successfully.\n");
-            break;
-        }
-    }
-
-    if (!found)
-    {
-        printf("Contact not found.\n");
-    }
-
-    fclose(fp);
-}
-
-void modifyContact()
-{
-    FILE *fp = openFile("contacts.dat", "r+b");
-
-    char nameToModify[30];
-    printf("Enter name to modify: ");
-    scanf("%s", nameToModify);
-
-    Contact contact;
-    int found = 0;
-
-    while (fread(&contact, sizeof(Contact), 1, fp))
-    {
-        if (strcmp(contact.name, nameToModify) == 0)
-        {
-            found = 1;
-
-            printf("Enter new name: ");
-            scanf("%s", contact.name);
-            printf("Enter new surname: ");
-            scanf("%s", contact.surname);
-            printf("Enter new phone number: ");
-            scanf("%s", contact.phone);
-            printf("Enter new email address: ");
-            scanf("%s", contact.email);
-            printf("Enter new location: ");
-            scanf("%s", contact.location);
-            printf("Enter new company: ");
-            scanf("%s", contact.company);
-
-            fseek(fp, -(long)sizeof(Contact), SEEK_CUR);
-
-            fwrite(&contact, sizeof(Contact), 1, fp);
-
-            printf("Contact modified successfully.\n");
             break;
         }
     }
