@@ -9,8 +9,9 @@ typedef struct
     int isActive;
 } Contact;
 
-void addContact();
-void seeAllContacts();
+void createContact();
+int doesContactExist();
+void readContacts();
+void updateContact();
 void deleteContact();
-void modifyContact();
 void sortContacts();

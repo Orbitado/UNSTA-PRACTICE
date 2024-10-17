@@ -26,19 +26,19 @@ void openMenuOptions(int choice)
     {
     case 1:
         printf("--- Add Contact Details ---\n\n");
-        addContact();
+        createContact();
         break;
     case 2:
         printf("--- All Contacts ---\n\n");
-        seeAllContacts();
+        readContacts();
         break;
     case 3:
         printf("--- Select the contact to delete ---\n\n");
         deleteContact();
         break;
     case 4:
-        printf("--- Modify Contacts ---\n");
-        modifyContact();
+        printf("--- Select the contact to update ---\n");
+        updateContact();
         break;
     case 5:
         printf("--- Sort Contacts ---\n");

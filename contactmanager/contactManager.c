@@ -14,7 +14,7 @@ FILE *openFile(const char *fileName, const char *mode)
     return fp;
 }
 
-void addContact()
+void createContact()
 {
     FILE *fp = openFile("contacts.dat", "ab");
 
@@ -63,7 +63,7 @@ int doesContactExist(const char *name, const char *surname, const char *phone, c
     return 0;
 }
 
-void seeAllContacts()
+void readContacts()
 {
     FILE *fp = openFile("contacts.dat", "rb");
 
@@ -85,7 +85,7 @@ void seeAllContacts()
     fclose(fp);
 }
 
-void modifyContact()
+void updateContact()
 {
     FILE *fp = openFile("contacts.dat", "r+b");
 
@@ -165,4 +165,9 @@ void deleteContact()
     }
 
     fclose(fp);
+}
+
+void sortContacts()
+{
+    FILE *fp = openFile("contacts.dat", "r+b");
 }
