@@ -20,5 +20,5 @@ void readContacts();
 void updateContact();
 void deleteContact();
 // CONTACT HANDLERS
-void sortContacts();
+void sortContacts(int choice);
 int doesContactExist(const char *name, const char *surname, const char *phone, const char *email, const char *location, const char *company);

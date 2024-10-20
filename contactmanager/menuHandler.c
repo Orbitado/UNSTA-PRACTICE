@@ -42,8 +42,7 @@ void openMenuOptions(int choice)
         break;
     case 5:
         printf("--- Sort Contacts ---\n");
-        printf("This feature will be added soon...\n");
-        // sortContacts();
+        openMenuSortOptions();
         break;
     case 6:
         printf("--- Closing Program ---\n");
@@ -59,7 +58,11 @@ void openMenuSortOptions()
     printf("--- Select a sort option ---\n\n");
     printf("1. Sort by First Name\n");
     printf("2. Sort by Surname\n");
-    printf("3. Sort by Company\n");
+    printf("3. Sort by Company\n\n");
+    printf("Enter your choice: ");
     scanf("%d", &choice);
-    openMenuOptions(choice);
+
+    sortContacts(choice);
+
+    printf("Contacts sorted successfully.\n");
 }

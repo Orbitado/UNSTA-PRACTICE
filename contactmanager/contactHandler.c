@@ -38,9 +38,37 @@ int compareContacts(const void *a, const void *b, char option)
     }
 }
 
-// void sortContacts()
-// {
-//     FILE *fp = openFile("contacts.dat", "r+b");
+void sortContacts(int choice)
+{
+    FILE *fp = openFile("contacts.dat", "r+b");
 
-//     qsort(fp, sizeof(Contact), sizeof(Contact), compareContacts);
-// }
+    fseek(fp, 0, SEEK_END);
+    size_t fileSize = ftell(fp);
+    size_t contactCount = fileSize / sizeof(Contact);
+    fseek(fp, 0, SEEK_SET);
+
+    Contact *contacts = malloc(contactCount * sizeof(Contact));
+    if (contacts == NULL)
+    {
+        printf("Error allocating memory.\n");
+        fclose(fp);
+        return;
+    }
+
+    if (fread(contacts, sizeof(Contact), contactCount, fp) != contactCount)
+    {
+        printf("Error reading contacts from file.\n");
+        fclose(fp);
+        free(contacts);
+        return;
+    }
+    fclose(fp);
+
+    qsort(contacts, contactCount, sizeof(Contact), (int (*)(const void *, const void *))compareContacts);
+
+    fp = openFile("contacts.dat", "wb");
+    fwrite(contacts, sizeof(Contact), contactCount, fp);
+    fclose(fp);
+
+    free(contacts);
+}
