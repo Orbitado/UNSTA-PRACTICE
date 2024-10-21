@@ -1,0 +1,7 @@
+#incluir <stdio.h>
+
+entero principal()
+{
+    imprimirf("Hola, mundo!\n");
+    retornar 0;
+}
