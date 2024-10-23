@@ -57,7 +57,7 @@ int main()
     fputs(newCode, fp);
     fclose(fp);
 
-    printf("Transpilación completada.\n");
+    printf("Transpilation completed.\n");
 
     return 0;
 }
